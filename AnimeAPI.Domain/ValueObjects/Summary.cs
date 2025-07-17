@@ -45,4 +45,10 @@ public sealed record Summary
     public static implicit operator Summary(string summary) => Create(summary);
     
     #endregion
+    
+    #region Overrides
+    
+    public override string ToString() => SummaryText;
+    
+    #endregion
 }

@@ -46,4 +46,10 @@ public sealed record Director : ValueObject
     public static implicit operator Director(string director) => Create(director);
 
     #endregion
+    
+    #region Overrides
+    
+    public override string ToString() => DirectorName;
+    
+    #endregion
 }

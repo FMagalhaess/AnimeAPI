@@ -47,4 +47,10 @@ public sealed record Name : ValueObject
     public static implicit operator Name(string nome) => Create(nome);
     
     #endregion
+    
+    #region Overrides
+    
+    public override string ToString() => Tittle;
+    
+    #endregion
 }
