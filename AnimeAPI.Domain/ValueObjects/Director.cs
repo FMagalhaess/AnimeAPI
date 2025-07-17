@@ -23,7 +23,7 @@ public sealed record Director : ValueObject
 
     #region Properties
 
-    private string DirectorName { get; }
+    public string DirectorName { get; }
 
     #endregion
 
