@@ -13,9 +13,9 @@ public sealed record Summary
 
     #region Constructors
 
-    private Summary(string summary)
+    private Summary(string summaryText)
     {
-        SummaryText = summary;
+        SummaryText = summaryText;
     }
 
     #endregion

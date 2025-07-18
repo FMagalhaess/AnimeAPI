@@ -7,14 +7,19 @@ public sealed class Anime : Entity
 {
     #region Constructors
 
+    public Anime() : base(Guid.CreateVersion7())
+    {
+        
+    }
+    
     private Anime(
         string name,
         string director,
         string summary) : base(Guid.CreateVersion7())
     {
-        Name = Name.Create(name);
-        Director = Director.Create(director);
-        Summary = Summary.Create(summary);
+        Name = ValueObjects.Name.Create(name);
+        Director = ValueObjects.Director.Create(director);
+        Summary = ValueObjects.Summary.Create(summary);
     }
     
     private Anime(
@@ -31,9 +36,9 @@ public sealed class Anime : Entity
 
     #region Properties
 
-    public Name Name { get; }
-    public Director Director { get; }
-    public Summary Summary { get; }
+    public Name Name { get; private set; } = null!;
+    public Director Director { get; private set; } = null!;
+    public Summary Summary { get; private set; } = null!;
 
     #endregion
 

@@ -14,9 +14,9 @@ public sealed record Director : ValueObject
     
     #region Constructors
 
-    private Director(string director)
+    private Director(string directorName)
     {
-        DirectorName = director;
+        DirectorName = directorName;
     }
 
     #endregion
