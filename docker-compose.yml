@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  animeapi:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - "5104:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=AnimeDb;User Id=sa;Password=asdf1234afFFskd!hjl;"
+    depends_on:
+        - sqlserver
+    networks:
+        - app-network
+    
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "asdf1234afFFskd!hjl"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+        - app-network
+  
+volumes:
+  sqlserver-data:
+    
+networks: 
+  app-network:
+    driver: bridge
+  
