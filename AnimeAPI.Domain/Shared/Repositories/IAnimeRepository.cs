@@ -4,7 +4,7 @@ namespace AnimeAPI.Domain.Shared.Repositories;
 
 public interface IAnimeRepository
 {
-    Task<IEnumerable<Anime>> GetAllAsync();
+    Task<PaginatedList<Anime>> GetAllAsync(int pageNumber, int pageSize);
     Task<Anime?> GetByIdAsync(Guid id);
     Task<IEnumerable<Anime>> GetByDirectorOrNameAsync(string? director, string? name);
     Task AddAsync(Anime anime);
