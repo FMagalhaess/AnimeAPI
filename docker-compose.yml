@@ -6,10 +6,10 @@ services:
         context: .
         dockerfile: Dockerfile
     ports:
-      - "5104:80"
+      - "5104:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=AnimeDb;User Id=sa;Password=asdf1234afFFskd!hjl;"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=AnimeDb;User Id=sa;Password=asdf1234afFFskd!hjl;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=true;"
     depends_on:
         - sqlserver
     networks:
