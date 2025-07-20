@@ -54,5 +54,30 @@ public sealed class Anime : Entity
         return new Anime(name, director, summary);
     }
     
+    public void UpdateName(Name name)
+    {
+        Name = name;
+    }
+    public void UpdateName(string name)
+    {
+        Name = ValueObjects.Name.Create(name);
+    }
+    public void UpdateDirector(Director director)
+    {
+        Director = director;
+    }
+    public void UpdateDirector(string director)
+    {
+        Director = ValueObjects.Director.Create(director);
+    }
+    public void UpdateSummary(Summary summary)
+    {
+        Summary = summary;
+    }
+    public void UpdateSummary(string summary)
+    {
+        Summary = ValueObjects.Summary.Create(summary);
+    }
+    
     #endregion
 }
