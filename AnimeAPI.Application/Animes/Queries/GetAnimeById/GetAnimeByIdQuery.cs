@@ -1,4 +1,4 @@
-using AnimeAPI.Application.DTOs;
+using AnimeAPI.Application.Animes.DTOs;
 using MediatR;
 
 namespace AnimeAPI.Application.Animes.Queries.GetAnimeById;

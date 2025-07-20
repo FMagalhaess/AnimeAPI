@@ -1,4 +1,4 @@
-using AnimeAPI.Application.DTOs;
+using AnimeAPI.Application.Animes.DTOs;
 using AnimeAPI.Domain.Shared;
 using MediatR;
 

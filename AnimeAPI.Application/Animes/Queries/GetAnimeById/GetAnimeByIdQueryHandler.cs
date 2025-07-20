@@ -1,4 +1,4 @@
-using AnimeAPI.Application.DTOs;
+using AnimeAPI.Application.Animes.DTOs;
 using AnimeAPI.Domain.Entities;
 using AnimeAPI.Domain.Shared.Repositories;
 using MediatR;

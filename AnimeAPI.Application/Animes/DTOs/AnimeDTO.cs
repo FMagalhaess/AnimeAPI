@@ -1,6 +1,4 @@
-using AnimeAPI.Domain.ValueObjects;
-
-namespace AnimeAPI.Application.DTOs;
+namespace AnimeAPI.Application.Animes.DTOs;
 
 public class AnimeDto
 {
