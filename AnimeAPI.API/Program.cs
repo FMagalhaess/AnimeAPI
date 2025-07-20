@@ -1,3 +1,4 @@
+using AnimeAPI.API.Middleware;
 using AnimeAPI.Application.Animes.Commands.CreateAnime;
 using AnimeAPI.Domain.Shared.Repositories;
 using AnimeAPI.Infrastructure.Data;
@@ -32,6 +33,12 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Creat
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
+builder.Logging.SetMinimumLevel(LogLevel.Information);
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -52,6 +59,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 app.UseHttpsRedirection();
+
+app.UseExceptionHandlingMiddleware();
 
 app.MapControllers();
 
