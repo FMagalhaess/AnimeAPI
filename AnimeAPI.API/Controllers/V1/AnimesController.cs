@@ -1,6 +1,10 @@
 using System.Net;
 using AnimeAPI.Application.Animes.Commands.CreateAnime;
+using AnimeAPI.Application.Animes.Commands.DeleteAnime;
+using AnimeAPI.Application.Animes.Commands.UpdateAnime;
+using AnimeAPI.Application.Animes.DTOs;
 using AnimeAPI.Application.Animes.Queries.GetAllAnimes;
+using AnimeAPI.Application.Animes.Queries.GetAnimeByDirectorOrName;
 using AnimeAPI.Application.Animes.Queries.GetAnimeById;
 using AnimeAPI.Domain.Entities;
 using MediatR;
@@ -65,5 +69,49 @@ public class AnimesController(IMediator mediator, ILogger<AnimesController> logg
 
         logger.LogInformation("Total de animes encontrados: {TotalCount}", paginatedAnimes.TotalCount);
         return Ok(paginatedAnimes);
+    }
+    [HttpGet("search")]
+    [ProducesResponseType(typeof(IEnumerable<AnimeDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetAnimesByDirectorOrName(
+        [FromQuery] string? director,
+        [FromQuery] string? name)
+    {
+        var query = new GetAnimeByDirectorOrNameQuery(director, name);
+        var animes = await mediator.Send(query);
+        return Ok(animes);
+    }
+
+    
+    [HttpPut("{id:guid}")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> UpdateAnime(Guid id, [FromBody] UpdateAnimeDto request)
+    {
+        var command = new UpdateAnimeCommand
+        {
+            Id = id,
+            NameTittle = request.NameTittle,
+            DirectorName = request.DirectorName,
+            SummaryText = request.SummaryText
+        };
+
+        var result = await mediator.Send(command);
+        if (!result)
+            return NotFound();
+        return NoContent();
+    }
+
+   
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> DeleteAnime(Guid id)
+    {
+        var command = new DeleteAnimeCommand(id);
+        var result = await mediator.Send(command);
+        if (!result)
+            return NotFound();
+        return NoContent();
     }
 }
